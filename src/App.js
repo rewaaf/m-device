@@ -9,6 +9,7 @@ class App extends Component {
         <MForm />
         <br /><br />
         <h3 style={{textAlign:'center', color:'blueviolet' }}>All Devices Information</h3>
+        <p>Arwa</p>
         <Results />
       </div>
     );
