@@ -11,7 +11,7 @@ class EditComponent extends Component {
                 { name: 'Saudi Arabia', cites: ['Riyadh', 'Jeddah', 'Dammam'] },
                 { name: 'USA', cites: ['California', 'Florida', 'Virginia'] },
             ],
-            selectedCountry: 'Saudi Arabia'
+            selectedCountry: 'Saudi Arabia',
         }
     }
 

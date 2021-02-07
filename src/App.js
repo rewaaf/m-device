@@ -6,10 +6,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MForm />
+        <h1>Welcome to SFDA Medical Devices Management</h1>
+
+        <p style={{textAlign: 'center'}}>The leading regional regularity authority for food, drugs and medical devices with proffessional 
+          and excellent services that contributes to the protection and advancement of the health in Saudi Arabia</p>
+
         <br /><br />
-        <h3 style={{textAlign:'center', color:'blueviolet' }}>All Devices Information</h3>
-        <p>Arwa</p>
+
+        <MForm />
+
+        <br /><br />
+
         <Results />
       </div>
     );
