@@ -71,6 +71,10 @@ class MForm extends Component {
         this.setState({ selectedCountry: e.target.value })
     }
 
+    openDialog = () => {
+        this.setState({ open: true });
+    }
+
     render() {
         let Country = this.state.Countries.filter(Country => {
             return Country.name === this.state.selectedCountry
@@ -84,7 +88,7 @@ class MForm extends Component {
                         this.setState({ open: false });
                     }}
                     // onClosed={evt => console.log(evt.detail.action)}
-                >
+                    >
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
 

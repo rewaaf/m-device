@@ -22,7 +22,7 @@ const Reducer = (state = [], action) => {
                         ProductModelNumber: action.data.ProductModelNumberNew,
                         ProductDescription: action.data.ProductDescriptionNew,
                         ProductExiprationDate: action.data.ProductExiprationDateNew,
-                        editing: !result.editing
+                        editing: !result.editing,
                     }
                 } else return result;
             })

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
+import { Dialog, DialogActions, DialogButton, DialogContent } from '@rmwc/dialog';
 
 class EditComponent extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class EditComponent extends Component {
                 { name: 'USA', cites: ['California', 'Florida', 'Virginia'] },
             ],
             selectedCountry: 'Saudi Arabia',
+            open: false,
         }
     }
 
@@ -48,6 +50,10 @@ class EditComponent extends Component {
         this.setState({ selectedCountry: e.target.value })
     }
 
+    openDialog = () => {
+        this.setState({ open: true });
+    }
+
     render() {
         let Country = this.state.Countries.filter(Country => {
             return Country.name === this.state.selectedCountry
@@ -55,101 +61,97 @@ class EditComponent extends Component {
 
         return (
             <div>
-                <form onSubmit={this.handleEdit}>
-                    <h3 style={{ color: 'blueviolet' }}>Manufacturer</h3>
-                    <hr /><br />
+                <Dialog
+                    open={this.state.open}
+                    onClose={evt => {
+                        this.setState({ open: false });
+                    }}
+                // onClosed={evt => console.log(evt.detail.action)}
+                >
 
-                    <TextField fullwidth label="Enter Name" inputRef={(input) => this.getName = input}
-                        defaultValue={this.props.result.name} />
-                    <br /><br />
+                    <DialogContent>
+                        <form onSubmit={this.handleEdit}>
+                            <h3>Manufacturer</h3>
+                            <hr /><br />
 
-                    {/* <Select type='text' label="Select Country" ref={(input) => this.getCountry = input}  >
-                            <option value="Saudi Arabia">Saudi Arabia</option>
-                            <option value="USA">USA</option>
-                            <option value="UAE">UAE</option>
-                        </Select> */}
+                            <TextField fullwidth label="Enter Name" inputRef={(input) => this.getName = input}
+                                defaultValue={this.props.result.name} />
+                            <br /><br />
 
-                    {/* <select required ref={(input) => this.getCountry = input} defaultValue={this.props.result.Country}>
-                                <option value="" disabled selected>Select Country</option>
-                                <option value="Saudi Arabia">Saudi Arabia</option>
-                                <option value="USA">USA</option>
-                                <option value="UAE">UAE</option>
+                            <select required defaultValue={this.props.result.Country} ref={(input) => this.getCountry = input}
+                                onChange={this.handleChange.bind(this)}>
+                                {
+                                    this.state.Countries.map((country, i) => {
+                                        return <option>{country.name}</option>
+                                    })
+                                }
                             </select>
                             <br /><br /><br />
 
-                            <select required ref={(input) => this.getCity = input} defaultValue={this.props.result.City}>
-                                <option value="" disabled selected>Select City</option>
-                                <option value="Riyadh">Riyadh</option>
-                                <option value="Jeddah">Jeddah</option>
-                                <option value="Dammam">Dammam</option>
+                            <select required defaultValue={this.props.result.City} ref={(input) => this.getCity = input}>
+                                {
+                                    Country[0].cites.map((city, i) => {
+                                        return <option>{city}</option>
+                                    })
+                                }
                             </select>
-                            <br /><br /><br /> */}
+                            <br /><br /><br />
 
-                    <select required defaultValue={this.props.result.Country} ref={(input) => this.getCountry = input}
-                         onChange={this.handleChange.bind(this)}>
-                        {
-                            this.state.Countries.map((country, i) => {
-                                return <option>{country.name}</option>
-                            })
-                        }
-                    </select>
-                    <br /><br /><br />
+                            <TextField textarea fullwidth label="Enter Address" inputRef={(input) => this.getAddress = input}
+                                defaultValue={this.props.result.address} />
+                            <br /><br />
 
-                    <select required defaultValue={this.props.result.City} ref={(input) => this.getCity = input}>
-                        {
-                            Country[0].cites.map((city, i) => {
-                                return <option>{city}</option>
-                            })
-                        }
-                    </select>
-                    <br /><br /><br />
+                            <TextField fullwidth label="Enter Postal Code" inputRef={(input) => this.getPC = input}
+                                defaultValue={this.props.result.PC} />
+                            <br /><br />
 
-                    <TextField textarea fullwidth label="Enter Address" inputRef={(input) => this.getAddress = input}
-                        defaultValue={this.props.result.address} />
-                    <br /><br />
+                            <br /><br />
 
-                    <TextField fullwidth label="Enter Postal Code" inputRef={(input) => this.getPC = input}
-                        defaultValue={this.props.result.PC} />
-                    <br /><br />
+                            <h3>Device</h3>
+                            <hr /><br />
+                            <select required ref={(input) => this.getProducType = input} defaultValue={this.props.result.productType}>
+                                <option value="" disabled selected>Select Product Type</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                            <br /><br />
 
-                    <br /><br />
+                            <TextField fullwidth label="Enter Product Trade Name" inputRef={(input) => this.getProductTradeName = input}
+                                defaultValue={this.props.result.productTradeName} />
+                            <br /><br />
 
-                    <h3 style={{ color: 'blueviolet' }}>Device</h3>
-                    <hr /><br />
-                    <select required ref={(input) => this.getProducType = input} defaultValue={this.props.result.productType}>
-                        <option value="" disabled selected>Select Product Type</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                    </select>
-                    <br /><br />
+                            <TextField fullwidth label="Enter Product Generic Name" inputRef={(input) => this.getProductGenericName = input}
+                                defaultValue={this.props.result.ProductGenericName} />
+                            <br /><br />
 
-                    <TextField fullwidth label="Enter Product Trade Name" inputRef={(input) => this.getProductTradeName = input}
-                        defaultValue={this.props.result.productTradeName} />
-                    <br /><br />
+                            <TextField fullwidth label="Enter Product Model Number" inputRef={(input) => this.getProductModelNumber = input}
+                                defaultValue={this.props.result.ProductModelNumber} />
+                            <br /><br />
 
-                    <TextField fullwidth label="Enter Product Generic Name" inputRef={(input) => this.getProductGenericName = input}
-                        defaultValue={this.props.result.ProductGenericName} />
-                    <br /><br />
+                            <TextField textarea outlined fullwidth label="Enter Product Description" inputRef={(input) => this.getProductDescription = input}
+                                defaultValue={this.props.result.ProductDescription} />
+                            <br /><br />
 
-                    <TextField fullwidth label="Enter Product Model Number" inputRef={(input) => this.getProductModelNumber = input}
-                        defaultValue={this.props.result.ProductModelNumber} />
-                    <br /><br />
+                            {/* <Picker /> */}
+                            <TextField fullwidth label="Product Exipration Date" type="date" inputRef={(input) => this.getProductExiprationDate = input}
+                                defaultValue={this.props.result.ProductExiprationDate} />
+                            <br /><br />
 
-                    <TextField textarea outlined fullwidth label="Enter Product Description" inputRef={(input) => this.getProductDescription = input}
-                        defaultValue={this.props.result.ProductDescription} />
-                    <br /><br />
+                            <br /><br />
 
-                    {/* <Picker /> */}
-                    <TextField fullwidth label="Product Exipration Date" type="date" inputRef={(input) => this.getProductExiprationDate = input}
-                        defaultValue={this.props.result.ProductExiprationDate} />
-                    <br /><br />
+                            <Button className='btn' label="Update" outlined onClick={() => this.setState({ open: false })} />
+                        </form>
 
-                    <br /><br />
+                    </DialogContent>
+                </Dialog>
 
-                    <Button label="Update" outlined />
-
-                </form>
+                <Button className='btn' label="Edit" outlined
+                    onClick={() => { this.props.dispatch({ type: 'EDIT_DATA', id: this.props.result.id }) }, () => this.setState({ open: true })} />
+                &nbsp;
+                <Button className='btn' label="Delete" outlined
+                    onClick={() => this.props.dispatch({ type: 'DELETE_DATA', id: this.props.result.id })}
+                />
             </div>
         );
     }
