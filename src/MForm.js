@@ -18,7 +18,16 @@ class MForm extends Component {
                 { name: 'USA', cites: ['California', 'Florida', 'Virginia'] },
             ],
             selectedCountry: 'Saudi Arabia',
-            open: false
+            open: false,
+            name: '',
+            address: '',
+            PC: '',
+            PT: '',
+            PTN: '',
+            PGN: '',
+            PMN: '',
+            PD: '',
+            PED: ''
         };
     }
 
@@ -68,10 +77,59 @@ class MForm extends Component {
     }
 
     handleChange = (e) => {
-        this.setState({ selectedCountry: e.target.value })
+        this.setState({ selectedCountry: e.target.value });
+    }
+
+    NameChange = (e) => {
+        this.setState({name: e.target.value})
+    }
+
+    AddressChange = (e) => {
+        this.setState({address: e.target.value})
+    }
+
+    PCChange = (e) => {
+        this.setState({PC: e.target.value})
+    }
+
+    PTChange = (e) => {
+        this.setState({PT: e.target.value})
+    }
+
+    PTNChange = (e) => {
+        this.setState({PTN: e.target.value})
+    }
+
+    PGNChange = (e) => {
+        this.setState({PGN: e.target.value})
+    }
+
+    PMNChange = (e) => {
+        this.setState({PMN: e.target.value})
+    }
+
+    PDChange = (e) => {
+        this.setState({PD: e.target.value})
+    }
+
+    PEDChange = (e) => {
+        this.setState({PED: e.target.value})
     }
 
     openDialog = () => {
+        this.setState({ open: true });
+    }
+
+    clearInputs = () => {
+        this.setState({name: ''});
+        this.setState({address: ''});
+        this.setState({PC: ''});
+        this.setState({PT: ''});
+        this.setState({PTN: ''});
+        this.setState({PGN: ''});
+        this.setState({PMN: ''});
+        this.setState({PD: ''});
+        this.setState({PED: ''});
         this.setState({ open: true });
     }
 
@@ -117,20 +175,20 @@ class MForm extends Component {
                                     </select>
                                     <br /><br /><br />
 
-                                    <TextField required fullwidth label="Enter Name" inputRef={(input) => this.getName = input} />
+                                    <TextField required fullwidth label="Enter Name" inputRef={(input) => this.getName = input} onChange={this.NameChange}/>
                                     <br /><br />
 
-                                    <TextField required textarea fullwidth label="Enter Address" inputRef={(input) => this.getAddress = input} />
+                                    <TextField required textarea fullwidth label="Enter Address" inputRef={(input) => this.getAddress = input} onChange={this.AddressChange} />
                                     <br /><br />
 
-                                    <TextField required fullwidth label="Enter Postal Code" inputRef={(input) => this.getPC = input} />
+                                    <TextField required fullwidth label="Enter Postal Code" inputRef={(input) => this.getPC = input} onChange={this.PCChange} />
                                     <br /><br />
                                 </div>
 
                                 <h3>Device</h3>
                                 <hr /><br />
                                 <div className="form">
-                                    <select required ref={(input) => this.getProducType = input}>
+                                    <select required ref={(input) => this.getProducType = input} onChange={this.PTChange} >
                                         <option value="" disabled selected>Select Product Type</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
@@ -138,24 +196,25 @@ class MForm extends Component {
                                     </select>
                                     <br /><br />
 
-                                    <TextField required fullwidth label="Enter Product Trade Name" inputRef={(input) => this.getProductTradeName = input} />
+                                    <TextField required fullwidth label="Enter Product Trade Name" inputRef={(input) => this.getProductTradeName = input} onChange={this.PTNChange} />
                                     <br /><br />
 
-                                    <TextField required fullwidth label="Enter Product Generic Name" inputRef={(input) => this.getProductGenericName = input} />
+                                    <TextField required fullwidth label="Enter Product Generic Name" inputRef={(input) => this.getProductGenericName = input} onChange={this.PGNChange} />
                                     <br /><br />
 
-                                    <TextField required fullwidth label="Enter Product Model Number" inputRef={(input) => this.getProductModelNumber = input} />
+                                    <TextField required fullwidth label="Enter Product Model Number" inputRef={(input) => this.getProductModelNumber = input} onChange={this.PMNChange} />
                                     <br /><br />
 
-                                    <TextField required textarea outlined fullwidth label="Enter Product Description" inputRef={(input) => this.getProductDescription = input} />
+                                    <TextField required textarea outlined fullwidth label="Enter Product Description" inputRef={(input) => this.getProductDescription = input} onChange={this.PDChange} />
                                     <br /><br />
 
                                     {/* <Picker /> */}
-                                    <TextField required fullwidth label="Product Exipration Date" type="date" inputRef={(input) => this.getProductExiprationDate = input} />
+                                    <TextField required fullwidth label="Product Exipration Date" type="date" inputRef={(input) => this.getProductExiprationDate = input} onChange={this.PEDChange} />
                                     <br /><br />
                                 </div>
 
-                                <Button className='btn' label="Add Device" outlined onClick={() => this.setState({ open: false })} />
+                                <Button className='btn' label="Add Device" disabled={!this.state.name || !this.state.address || !this.state.PC || !this.state.PT ||
+                                 !this.state.PTN || !this.state.PGN || !this.state.PMN || !this.state.PD || !this.state.PED } outlined onClick={() => this.setState({ open: false })} />
                                 
                                 <br /><br />
 
@@ -165,7 +224,7 @@ class MForm extends Component {
                 </Dialog>
 
                 <div className='btn-add'>
-                <Button className='btn' raised onClick={() => this.setState({ open: true })}>
+                <Button className='btn' raised onClick={() => {this.clearInputs()}}>
                     Add
                 </Button>
                 </div>

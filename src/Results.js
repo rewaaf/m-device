@@ -15,6 +15,7 @@ class Results extends Component {
                     {this.props.results.map((result) => (
                         <GridCell phone={12} tablet={12} desktop={4} span={4}>
                         <div key={result.id}>
+                        {console.log(result.editing)}
                             {result.editing ? <EditComponent result={result} key={result.id} /> :
                                 <Result key={result.id} result={result} />}
                         </div>
