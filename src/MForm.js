@@ -2,12 +2,9 @@ import React, { Component, useState } from 'react';
 import 'rmwc/dist/styles';
 import { Button } from '@rmwc/button';
 import { TextField } from '@rmwc/textfield';
-import { Dialog, DialogActions, DialogButton, DialogContent } from '@rmwc/dialog';
+import { Dialog, DialogContent } from '@rmwc/dialog';
 import { connect } from 'react-redux';
 import './index.css';
-
-// import { Select } from '@rmwc/select';
-// import Picker from './Picker';
 
 class MForm extends Component {
     constructor(props) {
@@ -208,7 +205,6 @@ class MForm extends Component {
                                     <TextField required textarea outlined fullwidth label="Enter Product Description" inputRef={(input) => this.getProductDescription = input} onChange={this.PDChange} />
                                     <br /><br />
 
-                                    {/* <Picker /> */}
                                     <TextField required fullwidth label="Product Exipration Date" type="date" inputRef={(input) => this.getProductExiprationDate = input} onChange={this.PEDChange} />
                                     <br /><br />
                                 </div>

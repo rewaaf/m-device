@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from '@rmwc/button';
 import { Card, CardPrimaryAction } from '@rmwc/card';
 import EditComponent from './EditComponent';
+import moment from 'moment';
 
 class Result extends Component {
     render() {
@@ -21,7 +22,8 @@ class Result extends Component {
                         <p>Generic Name: {this.props.result.ProductGenericName}</p>
                         <p>Model Number: {this.props.result.ProductModelNumber}</p>
                         <p>Description: {this.props.result.ProductDescription}</p>
-                        <p>Exipration Date: {this.props.result.ProductExiprationDate}</p>
+                        <p>Exipration Date: {moment(this.props.result.ProductExiprationDate).format("dddd, MMMM Do YYYY")}</p>
+                        {/* <p>Exipration Date: {this.props.result.ProductExiprationDate}</p> */}
                         {/* <Button className='btn' label="Edit" outlined
                             onClick={() => {  this.props.dispatch({ type: 'EDIT_DATA', id: this.props.result.id })}, () => {this.openDialog() } } />
                         &nbsp;

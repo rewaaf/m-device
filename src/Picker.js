@@ -6,13 +6,12 @@ class Picker extends Component {
   constructor() {
     super();
     this.state = {
-      moment: moment()
     };
   }
 
-  handleChange = (moment) => {
+  handleChange = (value) => {
     this.setState({
-      moment
+      dateValue: value
     });
   }
 
@@ -28,7 +27,7 @@ class Picker extends Component {
         shortcuts={shortcuts} 
         moment={this.state.moment}
         onChange={this.handleChange}>
-        <input type="text" value={this.state.moment.format('YYYY-MM-DD HH:mm')} readOnly />
+        <input type="text" value={this.state.dateValue.format('YYYY-MM-DD HH:mm')} readOnly />
       </DatetimePickerTrigger>
     );
   }

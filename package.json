@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.6.2",
     "button": "^1.1.1",
     "fbjs": "^3.0.0",
+    "input-moment": "^0.4.0",
     "moment": "^2.29.1",
     "rc-datetime-picker": "^1.6.1",
     "react": "^17.0.1",
